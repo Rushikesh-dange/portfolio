@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rushikesh Dange | Cyber Security Engineer</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Rushikesh Dange is a Cyber Security Engineer specializing in SOC Operations, Network Security, VAPT, and Cloud DevOps.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              black: '#050505',
+              gray: {
+                900: '#0a0a0a',
+                800: '#111111',
+                700: '#1a1a1a',
+              },
+              primary: '#00ff41', // Matrix Green
+              secondary: '#008f11', // Darker Matrix Green
+            },
+            fontFamily: {
+              mono: ['Fira Code', 'monospace'],
+              tech: ['Share Tech Mono', 'monospace'],
+            },
+            animation: {
+              'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-black text-primary font-mono antialiased selection:bg-primary selection:text-black min-h-screen relative overflow-x-hidden">
+
+    <!-- Matrix Background Canvas -->
+    <canvas id="matrix-bg" class="fixed top-0 left-0 w-full h-full -z-10 opacity-20 pointer-events-none"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-black/80 backdrop-blur-md z-50 border-b border-primary/30 shadow-[0_0_15px_rgba(0,255,65,0.2)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-primary font-tech font-bold text-2xl hover:text-white transition-colors glitched-text" data-text="<RD/>">&lt;RD/&gt;</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="nav-link hover:text-white hover:drop-shadow-[0_0_8px_#00ff41] transition-all">_about</a>
+                        <a href="#skills" class="nav-link hover:text-white hover:drop-shadow-[0_0_8px_#00ff41] transition-all">_skills</a>
+                        <a href="#experience" class="nav-link hover:text-white hover:drop-shadow-[0_0_8px_#00ff41] transition-all">_experience</a>
+                        <a href="#projects" class="nav-link hover:text-white hover:drop-shadow-[0_0_8px_#00ff41] transition-all">_projects</a>
+                        <a href="#contact" class="nav-link hover:text-white hover:drop-shadow-[0_0_8px_#00ff41] transition-all">_contact</a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 text-primary hover:text-white focus:outline-none border border-primary rounded hover:bg-primary/20">
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-gray-900 border-b border-primary/50" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 text-base font-medium hover:bg-primary/20 hover:text-white">_about</a>
+                <a href="#skills" class="block px-3 py-2 text-base font-medium hover:bg-primary/20 hover:text-white">_skills</a>
+                <a href="#experience" class="block px-3 py-2 text-base font-medium hover:bg-primary/20 hover:text-white">_experience</a>
+                <a href="#projects" class="block px-3 py-2 text-base font-medium hover:bg-primary/20 hover:text-white">_projects</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium hover:bg-primary/20 hover:text-white">_contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between min-h-screen">
+        <div class="md:w-3/5 md:pr-10 z-10">
+            <div class="mb-4 text-gray-400 font-tech">
+                <span>user@host:~$</span> <span id="typewriter-command" class="text-white"></span><span class="animate-pulse">_</span>
+            </div>
+            
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-2 font-tech glitched-text tracking-tighter" data-text="RUSHIKESH DANGE">
+                RUSHIKESH DANGE
+            </h1>
+            <h2 class="text-2xl sm:text-3xl text-primary mb-6">
+                &gt; Cyber Security Engineer
+            </h2>
+            
+            <div class="bg-gray-900/80 p-6 rounded border border-primary/30 shadow-[0_0_15px_rgba(0,255,65,0.1)] mb-8 font-mono text-sm leading-relaxed text-gray-300">
+                <span class="text-primary">System.out.print</span>("I protect and secure enterprise networks. Specializing in SOC Operations, Network Security, VAPT, and Cloud DevOps.");
+            </div>
+
+            <div class="flex space-x-6 mb-8 text-2xl">
+                <a href="https://github.com/Rushikesh-dange/" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/rushikesh-dange/" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="http://instagram.com/rushikesh_dange_" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100009689072863" class="social-icon"><i class="fab fa-facebook"></i></a>
+                <a href="https://tryhackme.com/p/Rushikesh.Dange" class="social-icon"><i class="fas fa-shield-halved"></i></a>
+            </div>
+            
+            <a href="#contact" class="cyber-button inline-block text-black bg-primary px-8 py-3 font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                INITIALIZE_CONTACT()
+            </a>
+        </div>
+        
+        <div class="md:w-2/5 mt-16 md:mt-0 flex justify-center z-10">
+            <div class="relative w-64 h-64 md:w-80 md:h-80 scanlines-container">
+                <div class="absolute inset-0 bg-primary/20 mix-blend-color z-20 pointer-events-none rounded-sm"></div>
+                <div class="scanline z-30"></div>
+                <img src="assets/images/profile.jpg" alt="Rushikesh Dange" class="w-full h-full object-cover filter grayscale contrast-125 rounded-sm border-2 border-primary shadow-[0_0_30px_rgba(0,255,65,0.3)]">
+                <!-- Decorative Corner Brackets -->
+                <div class="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-primary"></div>
+                <div class="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-primary"></div>
+                <div class="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-primary"></div>
+                <div class="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-primary"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Education Section -->
+    <section id="about" class="py-20 relative border-t border-primary/20 bg-gray-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center mb-12">
+                <span class="text-white text-2xl font-tech mr-4">[01]</span>
+                <h2 class="text-3xl font-bold text-primary font-tech uppercase tracking-widest">ABOUT_ME</h2>
+                <div class="h-px bg-primary/30 flex-grow ml-6"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="terminal-window">
+                    <div class="terminal-header flex items-center px-4 py-2 bg-gray-800 border-b border-primary/30">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <span class="ml-4 text-xs text-gray-400">root@kali:~/objective.txt</span>
+                    </div>
+                    <div class="p-6 bg-black text-gray-300 text-sm leading-loose">
+                        <span class="text-primary">cat</span> about_me.txt<br><br>
+                        I am a highly motivated Cyber Security Engineer and PGCP-ITISS graduate, passionate about defending digital infrastructures and identifying vulnerabilities before they can be exploited. My expertise spans Security Operations Center (SOC) environments, Network Security, Vulnerability Assessment and Penetration Testing (VAPT), and robust Linux Administration.
+                        <br><br>
+                        Beyond traditional security, I bridge the gap between development and operations by implementing DevSecOps pipelines, conducting automated vulnerability scans, and deploying scalable infrastructure as code (IaC) on AWS using Terraform. 
+                        <br><br>
+                        Whether I am analyzing packet captures with Wireshark, configuring NIDS with Snort, or building CI/CD pipelines, my core objective remains the same: to build resilient enterprise systems, actively hunt for threats, and execute swift incident response to neutralize attacks.
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6 font-tech flex items-center">
+                        <i class="fas fa-graduation-cap mr-3 text-primary"></i> // EDUCATION
+                    </h3>
+                    <div class="border-l-2 border-primary/30 pl-6 space-y-8 relative">
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-primary rounded-full -left-[1.65rem] top-1.5 shadow-[0_0_10px_#00ff41]"></div>
+                            <h4 class="text-lg font-bold text-white">Sanjivani College of Engineering</h4>
+                            <p class="text-primary text-sm mb-1">B.Tech – Electronics & Computer Engineering</p>
+                            <p class="text-xs text-gray-400">2021 – 2025 | CGPA: 7.05</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-primary rounded-full -left-[1.65rem] top-1.5"></div>
+                            <h4 class="text-lg font-bold text-white">Shree Ganesh Junior College</h4>
+                            <p class="text-primary text-sm mb-1">HSC – Maharashtra State Board</p>
+                            <p class="text-xs text-gray-400">2021 | 78.17%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 relative border-t border-primary/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center mb-12">
+                <span class="text-white text-2xl font-tech mr-4">[02]</span>
+                <h2 class="text-3xl font-bold text-primary font-tech uppercase tracking-widest">TECH_STACK</h2>
+                <div class="h-px bg-primary/30 flex-grow ml-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Skill Card 1 -->
+                <div class="cyber-card group p-1 bg-gradient-to-br from-primary/50 to-black rounded-sm relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,65,0.4)]">
+                    <div class="bg-black h-full p-6 relative z-10 flex flex-col items-center text-center">
+                        <i class="fas fa-shield-virus text-4xl text-white group-hover:text-primary transition-colors mb-4"></i>
+                        <h3 class="text-lg font-bold text-white mb-4 border-b border-primary/30 pb-2 w-full">CYBER_SECURITY</h3>
+                        <ul class="text-xs space-y-2 text-gray-400 font-tech w-full">
+                            <li>> VAPT & OWASP Top 10</li>
+                            <li>> SOC Ops & Incident Response</li>
+                            <li>> Snort, Wireshark, Nmap</li>
+                            <li>> Nessus, Burp Suite</li>
+                            <li>> ELK Stack, SIEM, Falco</li>
+                            <li>> Threat Hunting & Log Analysis</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Skill Card 2 -->
+                <div class="cyber-card group p-1 bg-gradient-to-br from-primary/50 to-black rounded-sm relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,65,0.4)]">
+                    <div class="bg-black h-full p-6 relative z-10 flex flex-col items-center text-center">
+                        <i class="fas fa-network-wired text-4xl text-white group-hover:text-primary transition-colors mb-4"></i>
+                        <h3 class="text-lg font-bold text-white mb-4 border-b border-primary/30 pb-2 w-full">NETWORKING</h3>
+                        <ul class="text-xs space-y-2 text-gray-400 font-tech w-full">
+                            <li>> TCP/IP & Routing</li>
+                            <li>> Switching & VLANs</li>
+                            <li>> ACL, DNS, DHCP</li>
+                            <li>> Network Traffic Analysis</li>
+                            <li>> Linux/Windows Admin</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Skill Card 3 -->
+                <div class="cyber-card group p-1 bg-gradient-to-br from-primary/50 to-black rounded-sm relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,65,0.4)]">
+                    <div class="bg-black h-full p-6 relative z-10 flex flex-col items-center text-center">
+                        <i class="fab fa-aws text-4xl text-white group-hover:text-primary transition-colors mb-4"></i>
+                        <h3 class="text-lg font-bold text-white mb-4 border-b border-primary/30 pb-2 w-full">CLOUD_DEVOPS</h3>
+                        <ul class="text-xs space-y-2 text-gray-400 font-tech w-full">
+                            <li>> AWS (EC2, VPC, EKS)</li>
+                            <li>> Docker & Kubernetes</li>
+                            <li>> Terraform (IaC)</li>
+                            <li>> DevSecOps Pipelines</li>
+                            <li>> Jenkins, Git, GitHub</li>
+                            <li>> SonarQube, Trivy, Checkov</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Skill Card 4 -->
+                <div class="cyber-card group p-1 bg-gradient-to-br from-primary/50 to-black rounded-sm relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,65,0.4)]">
+                    <div class="bg-black h-full p-6 relative z-10 flex flex-col items-center text-center">
+                        <i class="fas fa-terminal text-4xl text-white group-hover:text-primary transition-colors mb-4"></i>
+                        <h3 class="text-lg font-bold text-white mb-4 border-b border-primary/30 pb-2 w-full">OS_&_LANGS</h3>
+                        <ul class="text-xs space-y-2 text-gray-400 font-tech w-full">
+                            <li>> Python & SQL</li>
+                            <li>> Bash Shell Scripting</li>
+                            <li>> Kali Linux, Ubuntu</li>
+                            <li>> Windows Server</li>
+                            <li>> Prometheus & Grafana</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Certs tags -->
+            <div class="mt-12">
+                <h3 class="text-white text-lg font-tech mb-4">> ./list_certs.sh</h3>
+                <div class="flex flex-wrap gap-4">
+                    <span class="cert-tag border border-primary/50 text-primary px-3 py-1 text-xs hover:bg-primary hover:text-black transition-colors cursor-default"># Deloitte_Cyber_Job_Sim</span>
+                    <span class="cert-tag border border-primary/50 text-primary px-3 py-1 text-xs hover:bg-primary hover:text-black transition-colors cursor-default"># Google_Cloud_Security</span>
+                    <span class="cert-tag border border-primary/50 text-primary px-3 py-1 text-xs hover:bg-primary hover:text-black transition-colors cursor-default"># EC-Council_Ethical_Hacking</span>
+                    <span class="cert-tag border border-primary/50 text-primary px-3 py-1 text-xs hover:bg-primary hover:text-black transition-colors cursor-default"># Fortinet_Cybersecurity</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 relative border-t border-primary/20 bg-gray-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center mb-12">
+                <span class="text-white text-2xl font-tech mr-4">[03]</span>
+                <h2 class="text-3xl font-bold text-primary font-tech uppercase tracking-widest">EXPERIENCE</h2>
+                <div class="h-px bg-primary/30 flex-grow ml-6"></div>
+            </div>
+            
+            <div class="bg-black border border-primary/30 p-6 shadow-[0_0_15px_rgba(0,255,65,0.1)] relative overflow-hidden">
+                <div class="absolute right-4 top-4 text-primary/30 text-4xl opacity-20"><i class="fas fa-building"></i></div>
+                <h3 class="text-2xl font-bold text-white font-tech">SOC Intern</h3>
+                <p class="text-primary mb-4 text-sm">@ Shree Saibaba Sansthan, Shirdi <span class="text-gray-500 ml-2">| Jan 2025 – Apr 2025</span></p>
+                
+                <ul class="space-y-3 text-sm text-gray-300">
+                    <li class="flex items-start"><span class="text-primary mr-2">></span> Monitored network and system activities to identify suspicious events and security anomalies.</li>
+                    <li class="flex items-start"><span class="text-primary mr-2">></span> Performed vulnerability assessments using Nmap and Nessus and documented remediation recommendations.</li>
+                    <li class="flex items-start"><span class="text-primary mr-2">></span> Analyzed network traffic using Wireshark and assisted in IDS monitoring using Snort.</li>
+                    <li class="flex items-start"><span class="text-primary mr-2">></span> Assisted in log analysis, incident investigation, and implementation of security hardening best practices.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 relative border-t border-primary/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center mb-12">
+                <span class="text-white text-2xl font-tech mr-4">[04]</span>
+                <h2 class="text-3xl font-bold text-primary font-tech uppercase tracking-widest">EXECUTABLES</h2>
+                <div class="h-px bg-primary/30 flex-grow ml-6"></div>
+            </div>
+
+            <div class="space-y-12">
+                <!-- Project 1 -->
+                <div class="relative bg-black border border-primary/30 p-8 hover:border-primary transition-all duration-300 group">
+                    <!-- Tech decoration -->
+                    <div class="absolute top-0 right-0 p-2 text-xs text-primary/50 font-tech">ID: 0x01</div>
+                    <div class="absolute bottom-0 left-0 w-8 h-1 bg-primary"></div>
+                    
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
+                        <div>
+                            <p class="text-primary font-tech text-sm mb-2">// Network Security</p>
+                            <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">Network Intrusion Detection System (NIDS)</h3>
+                        </div>
+                        <div class="text-3xl text-gray-700 group-hover:text-primary/50 transition-colors hidden md:block">
+                            <i class="fas fa-radar"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900/80 p-4 rounded-sm border-l-2 border-primary mb-6 text-sm text-gray-300 leading-relaxed">
+                        <p class="mb-2">Configured Snort on Kali Linux to monitor and detect suspicious network traffic.</p>
+                        <p>Captured and analyzed alerts for possible threats, helping to understand intrusion detection in real networks.</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3 font-tech text-xs">
+                        <span class="bg-primary/10 text-primary px-2 py-1">Snort</span>
+                        <span class="bg-primary/10 text-primary px-2 py-1">Kali Linux</span>
+                        <span class="bg-primary/10 text-primary px-2 py-1">Network Traffic Analysis</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="relative bg-black border border-primary/30 p-8 hover:border-primary transition-all duration-300 group">
+                    <div class="absolute top-0 right-0 p-2 text-xs text-primary/50 font-tech">ID: 0x02</div>
+                    <div class="absolute bottom-0 left-0 w-8 h-1 bg-primary"></div>
+                    
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
+                        <div>
+                            <p class="text-primary font-tech text-sm mb-2">// Cloud Architecture</p>
+                            <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">Automated AWS 3-Tier Web Application</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900/80 p-4 rounded-sm border-l-2 border-primary mb-6 text-sm text-gray-300 leading-relaxed space-y-2">
+                        <p>Designed and deployed a secure AWS 3-Tier Architecture using VPC, including public/private subnets, route tables, NAT Gateway, and EC2 instances.</p>
+                        <p>Automated cloud infrastructure provisioning using Terraform, enabling scalable and repeatable deployment with IaC.</p>
+                        <p>Configured load balancing, security groups, and networking components to improve application availability.</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3 font-tech text-xs">
+                        <span class="bg-primary/10 text-primary px-2 py-1">AWS VPC</span>
+                        <span class="bg-primary/10 text-primary px-2 py-1">Terraform</span>
+                        <span class="bg-primary/10 text-primary px-2 py-1">EC2/ALB</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="relative bg-black border border-primary/30 p-8 hover:border-primary transition-all duration-300 group">
+                    <div class="absolute top-0 right-0 p-2 text-xs text-primary/50 font-tech">ID: 0x03</div>
+                    <div class="absolute bottom-0 left-0 w-8 h-1 bg-primary"></div>
+                    
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
+                        <div>
+                            <p class="text-primary font-tech text-sm mb-2">// DevSecOps</p>
+                            <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">SecureDevOps Compliance Pipeline</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900/80 p-4 rounded-sm border-l-2 border-primary mb-6 text-sm text-gray-300 leading-relaxed space-y-2">
+                        <p>Built a secure DevSecOps pipeline using Jenkins, GitHub, Docker, Kubernetes (AWS EKS), and Terraform.</p>
+                        <p>Integrated SonarQube, Semgrep, Trivy, Checkov, and tfsec for automated security scanning. Implemented security gates.</p>
+                        <p>Configured Prometheus, Grafana, Falco, and ELK Stack for monitoring, log analysis, and runtime threat detection.</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3 font-tech text-xs">
+                        <span class="bg-primary/10 text-primary px-2 py-1">Jenkins/Docker/K8s</span>
+                        <span class="bg-primary/10 text-primary px-2 py-1">Trivy/SonarQube</span>
+                        <span class="bg-primary/10 text-primary px-2 py-1">ELK/Prometheus</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 relative border-t border-primary/20 bg-gray-900/50 text-center">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-white mb-6 font-tech glitched-text" data-text="ESTABLISH_CONNECTION">ESTABLISH_CONNECTION</h2>
+            <p class="text-gray-400 mb-10 text-sm">
+                I am actively seeking opportunities as a Cyber Security Engineer. My communication ports are open. Whether you have an inquiry, an opportunity, or just want to ping, I'll ACK back.
+            </p>
+            <a href="mailto:dangerushi19@gmail.com" class="cyber-button inline-block text-black bg-primary px-8 py-4 font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                SEND_PACKET()
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-xs font-tech text-gray-500 border-t border-primary/30 bg-black">
+        <p>SYSTEM TERMINATED. BUILT BY RUSHIKESH DANGE.</p>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
