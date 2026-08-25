@@ -1,412 +1,339 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rushikesh Dange | Cyber Security Engineer</title>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Rushikesh Dange is a Cyber Security Engineer specializing in SOC Operations, Network Security, VAPT, and Cloud DevOps.">
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400;700&family=Outfit:wght@300;400;600;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Tailwind CSS (via CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
     
-    <!-- Tailwind Configuration -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              black: '#050505',
-              gray: {
-                900: '#0a0a0a',
-                800: '#111111',
-                700: '#1a1a1a',
-              },
-              primary: '#00ff41', // Matrix Green
-              secondary: '#008f11', // Darker Matrix Green
+              base: '#030305',
+              neon: '#ff2a2a', 
+              neonAlt: '#00f0ff',
             },
             fontFamily: {
-              mono: ['Fira Code', 'monospace'],
-              tech: ['Share Tech Mono', 'monospace'],
-            },
-            animation: {
-              'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              sans: ['Outfit', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+              display: ['Rajdhani', 'sans-serif'],
             }
           }
         }
       }
     </script>
 </head>
-<body class="bg-black text-primary font-mono antialiased selection:bg-primary selection:text-black min-h-screen relative overflow-x-hidden">
+<body class="bg-base text-gray-300 font-sans min-h-screen overflow-x-hidden selection:bg-neon selection:text-white pb-20">
 
-    <!-- Matrix Background Canvas -->
-    <canvas id="matrix-bg" class="fixed top-0 left-0 w-full h-full -z-10 opacity-20 pointer-events-none"></canvas>
+    <!-- Interactive Mouse Spotlight -->
+    <div id="spotlight"></div>
+    <div class="bg-grid"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full bg-black/80 backdrop-blur-md z-50 border-b border-primary/30 shadow-[0_0_15px_rgba(0,255,65,0.2)]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex-shrink-0">
-                    <a href="#" class="text-primary font-tech font-bold text-2xl hover:text-white transition-colors glitched-text" data-text="<RD/>">&lt;RD/&gt;</a>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#about" class="nav-link hover:text-white hover:drop-shadow-[0_0_8px_#00ff41] transition-all">_about</a>
-                        <a href="#skills" class="nav-link hover:text-white hover:drop-shadow-[0_0_8px_#00ff41] transition-all">_skills</a>
-                        <a href="#experience" class="nav-link hover:text-white hover:drop-shadow-[0_0_8px_#00ff41] transition-all">_experience</a>
-                        <a href="#projects" class="nav-link hover:text-white hover:drop-shadow-[0_0_8px_#00ff41] transition-all">_projects</a>
-                        <a href="#contact" class="nav-link hover:text-white hover:drop-shadow-[0_0_8px_#00ff41] transition-all">_contact</a>
-                    </div>
-                </div>
-                <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 text-primary hover:text-white focus:outline-none border border-primary rounded hover:bg-primary/20">
-                        <i class="fas fa-terminal"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div class="md:hidden hidden bg-gray-900 border-b border-primary/50" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#about" class="block px-3 py-2 text-base font-medium hover:bg-primary/20 hover:text-white">_about</a>
-                <a href="#skills" class="block px-3 py-2 text-base font-medium hover:bg-primary/20 hover:text-white">_skills</a>
-                <a href="#experience" class="block px-3 py-2 text-base font-medium hover:bg-primary/20 hover:text-white">_experience</a>
-                <a href="#projects" class="block px-3 py-2 text-base font-medium hover:bg-primary/20 hover:text-white">_projects</a>
-                <a href="#contact" class="block px-3 py-2 text-base font-medium hover:bg-primary/20 hover:text-white">_contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="hero" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between min-h-screen">
-        <div class="md:w-3/5 md:pr-10 z-10">
-            <div class="mb-4 text-gray-400 font-tech">
-                <span>user@host:~$</span> <span id="typewriter-command" class="text-white"></span><span class="animate-pulse">_</span>
-            </div>
-            
-            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-2 font-tech glitched-text tracking-tighter" data-text="RUSHIKESH DANGE">
-                RUSHIKESH DANGE
-            </h1>
-            <h2 class="text-2xl sm:text-3xl text-primary mb-6">
-                &gt; Cyber Security Engineer
-            </h2>
-            
-            <div class="bg-gray-900/80 p-6 rounded border border-primary/30 shadow-[0_0_15px_rgba(0,255,65,0.1)] mb-8 font-mono text-sm leading-relaxed text-gray-300">
-                <span class="text-primary">System.out.print</span>("I protect and secure enterprise networks. Specializing in SOC Operations, Network Security, VAPT, and Cloud DevOps.");
-            </div>
-
-            <div class="flex space-x-6 mb-8 text-2xl">
-                <a href="https://github.com/Rushikesh-dange/" class="social-icon"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/rushikesh-dange/" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                <a href="http://instagram.com/rushikesh_dange_" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com/profile.php?id=100009689072863" class="social-icon"><i class="fab fa-facebook"></i></a>
-                <a href="https://tryhackme.com/p/Rushikesh.Dange" class="social-icon"><i class="fas fa-shield-halved"></i></a>
-            </div>
-            
-            <a href="#contact" class="cyber-button inline-block text-black bg-primary px-8 py-3 font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">
-                INITIALIZE_CONTACT()
-            </a>
-        </div>
+    <main class="max-w-[1400px] mx-auto p-4 md:p-8 pt-12">
         
-        <div class="md:w-2/5 mt-16 md:mt-0 flex justify-center z-10">
-            <div class="relative w-64 h-64 md:w-80 md:h-80 scanlines-container">
-                <div class="absolute inset-0 bg-primary/20 mix-blend-color z-20 pointer-events-none rounded-sm"></div>
-                <div class="scanline z-30"></div>
-                <img src="assets/images/profile.jpg" alt="Rushikesh Dange" class="w-full h-full object-cover filter grayscale contrast-125 rounded-sm border-2 border-primary shadow-[0_0_30px_rgba(0,255,65,0.3)]">
-                <!-- Decorative Corner Brackets -->
-                <div class="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-primary"></div>
-                <div class="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-primary"></div>
-                <div class="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-primary"></div>
-                <div class="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-primary"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About & Education Section -->
-    <section id="about" class="py-20 relative border-t border-primary/20 bg-gray-900/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center mb-12">
-                <span class="text-white text-2xl font-tech mr-4">[01]</span>
-                <h2 class="text-3xl font-bold text-primary font-tech uppercase tracking-widest">ABOUT_ME</h2>
-                <div class="h-px bg-primary/30 flex-grow ml-6"></div>
-            </div>
+        <!-- ================= HERO BENTO ================= -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="terminal-window">
-                    <div class="terminal-header flex items-center px-4 py-2 bg-gray-800 border-b border-primary/30">
-                        <div class="flex space-x-2">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                        </div>
-                        <span class="ml-4 text-xs text-gray-400">root@kali:~/objective.txt</span>
-                    </div>
-                    <div class="p-6 bg-black text-gray-300 text-sm leading-loose">
-                        <span class="text-primary">cat</span> about_me.txt<br><br>
-                        I am a highly motivated Cyber Security Engineer and PGCP-ITISS graduate, passionate about defending digital infrastructures and identifying vulnerabilities before they can be exploited. My expertise spans Security Operations Center (SOC) environments, Network Security, Vulnerability Assessment and Penetration Testing (VAPT), and robust Linux Administration.
-                        <br><br>
-                        Beyond traditional security, I bridge the gap between development and operations by implementing DevSecOps pipelines, conducting automated vulnerability scans, and deploying scalable infrastructure as code (IaC) on AWS using Terraform. 
-                        <br><br>
-                        Whether I am analyzing packet captures with Wireshark, configuring NIDS with Snort, or building CI/CD pipelines, my core objective remains the same: to build resilient enterprise systems, actively hunt for threats, and execute swift incident response to neutralize attacks.
-                    </div>
+            <!-- Photo Panel (Tech ID Badge Style) -->
+            <div class="bento-panel flex flex-col items-center justify-center p-4 relative group overflow-hidden md:col-span-4 min-h-[450px]">
+                <div class="absolute top-4 left-4 flex gap-2">
+                    <div class="w-2 h-2 rounded-full bg-neonAlt/40"></div>
+                    <div class="w-2 h-2 rounded-full bg-neonAlt/40"></div>
                 </div>
-
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-6 font-tech flex items-center">
-                        <i class="fas fa-graduation-cap mr-3 text-primary"></i> // EDUCATION
-                    </h3>
-                    <div class="border-l-2 border-primary/30 pl-6 space-y-8 relative">
-                        <div class="relative">
-                            <div class="absolute w-3 h-3 bg-primary rounded-full -left-[1.65rem] top-1.5 shadow-[0_0_10px_#00ff41]"></div>
-                            <h4 class="text-lg font-bold text-white">Sanjivani College of Engineering</h4>
-                            <p class="text-primary text-sm mb-1">B.Tech – Electronics & Computer Engineering</p>
-                            <p class="text-xs text-gray-400">2021 – 2025 | CGPA: 7.05</p>
-                        </div>
-                        <div class="relative">
-                            <div class="absolute w-3 h-3 bg-primary rounded-full -left-[1.65rem] top-1.5"></div>
-                            <h4 class="text-lg font-bold text-white">Shree Ganesh Junior College</h4>
-                            <p class="text-primary text-sm mb-1">HSC – Maharashtra State Board</p>
-                            <p class="text-xs text-gray-400">2021 | 78.17%</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 relative border-t border-primary/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center mb-12">
-                <span class="text-white text-2xl font-tech mr-4">[02]</span>
-                <h2 class="text-3xl font-bold text-primary font-tech uppercase tracking-widest">TECH_STACK</h2>
-                <div class="h-px bg-primary/30 flex-grow ml-6"></div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Skill Card 1 -->
-                <div class="cyber-card group p-1 bg-gradient-to-br from-primary/50 to-black rounded-sm relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,65,0.4)]">
-                    <div class="bg-black h-full p-6 relative z-10 flex flex-col items-center text-center">
-                        <i class="fas fa-shield-virus text-4xl text-white group-hover:text-primary transition-colors mb-4"></i>
-                        <h3 class="text-lg font-bold text-white mb-4 border-b border-primary/30 pb-2 w-full">CYBER_SECURITY</h3>
-                        <ul class="text-xs space-y-2 text-gray-400 font-tech w-full">
-                            <li>> VAPT & OWASP Top 10</li>
-                            <li>> SOC Ops & Incident Response</li>
-                            <li>> Snort, Wireshark, Nmap</li>
-                            <li>> Nessus, Burp Suite</li>
-                            <li>> ELK Stack, SIEM, Falco</li>
-                            <li>> Threat Hunting & Log Analysis</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Skill Card 2 -->
-                <div class="cyber-card group p-1 bg-gradient-to-br from-primary/50 to-black rounded-sm relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,65,0.4)]">
-                    <div class="bg-black h-full p-6 relative z-10 flex flex-col items-center text-center">
-                        <i class="fas fa-network-wired text-4xl text-white group-hover:text-primary transition-colors mb-4"></i>
-                        <h3 class="text-lg font-bold text-white mb-4 border-b border-primary/30 pb-2 w-full">NETWORKING</h3>
-                        <ul class="text-xs space-y-2 text-gray-400 font-tech w-full">
-                            <li>> TCP/IP & Routing</li>
-                            <li>> Switching & VLANs</li>
-                            <li>> ACL, DNS, DHCP</li>
-                            <li>> Network Traffic Analysis</li>
-                            <li>> Linux/Windows Admin</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Skill Card 3 -->
-                <div class="cyber-card group p-1 bg-gradient-to-br from-primary/50 to-black rounded-sm relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,65,0.4)]">
-                    <div class="bg-black h-full p-6 relative z-10 flex flex-col items-center text-center">
-                        <i class="fab fa-aws text-4xl text-white group-hover:text-primary transition-colors mb-4"></i>
-                        <h3 class="text-lg font-bold text-white mb-4 border-b border-primary/30 pb-2 w-full">CLOUD_DEVOPS</h3>
-                        <ul class="text-xs space-y-2 text-gray-400 font-tech w-full">
-                            <li>> AWS (EC2, VPC, EKS)</li>
-                            <li>> Docker & Kubernetes</li>
-                            <li>> Terraform (IaC)</li>
-                            <li>> DevSecOps Pipelines</li>
-                            <li>> Jenkins, Git, GitHub</li>
-                            <li>> SonarQube, Trivy, Checkov</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Skill Card 4 -->
-                <div class="cyber-card group p-1 bg-gradient-to-br from-primary/50 to-black rounded-sm relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,65,0.4)]">
-                    <div class="bg-black h-full p-6 relative z-10 flex flex-col items-center text-center">
-                        <i class="fas fa-terminal text-4xl text-white group-hover:text-primary transition-colors mb-4"></i>
-                        <h3 class="text-lg font-bold text-white mb-4 border-b border-primary/30 pb-2 w-full">OS_&_LANGS</h3>
-                        <ul class="text-xs space-y-2 text-gray-400 font-tech w-full">
-                            <li>> Python & SQL</li>
-                            <li>> Bash Shell Scripting</li>
-                            <li>> Kali Linux, Ubuntu</li>
-                            <li>> Windows Server</li>
-                            <li>> Prometheus & Grafana</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Certs tags -->
-            <div class="mt-12">
-                <h3 class="text-white text-lg font-tech mb-4">> ./list_certs.sh</h3>
-                <div class="flex flex-wrap gap-4">
-                    <span class="cert-tag border border-primary/50 text-primary px-3 py-1 text-xs hover:bg-primary hover:text-black transition-colors cursor-default"># Deloitte_Cyber_Job_Sim</span>
-                    <span class="cert-tag border border-primary/50 text-primary px-3 py-1 text-xs hover:bg-primary hover:text-black transition-colors cursor-default"># Google_Cloud_Security</span>
-                    <span class="cert-tag border border-primary/50 text-primary px-3 py-1 text-xs hover:bg-primary hover:text-black transition-colors cursor-default"># EC-Council_Ethical_Hacking</span>
-                    <span class="cert-tag border border-primary/50 text-primary px-3 py-1 text-xs hover:bg-primary hover:text-black transition-colors cursor-default"># Fortinet_Cybersecurity</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="py-20 relative border-t border-primary/20 bg-gray-900/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center mb-12">
-                <span class="text-white text-2xl font-tech mr-4">[03]</span>
-                <h2 class="text-3xl font-bold text-primary font-tech uppercase tracking-widest">EXPERIENCE</h2>
-                <div class="h-px bg-primary/30 flex-grow ml-6"></div>
-            </div>
-            
-            <div class="bg-black border border-primary/30 p-6 shadow-[0_0_15px_rgba(0,255,65,0.1)] relative overflow-hidden">
-                <div class="absolute right-4 top-4 text-primary/30 text-4xl opacity-20"><i class="fas fa-building"></i></div>
-                <h3 class="text-2xl font-bold text-white font-tech">SOC Intern</h3>
-                <p class="text-primary mb-4 text-sm">@ Shree Saibaba Sansthan, Shirdi <span class="text-gray-500 ml-2">| Jan 2025 – Apr 2025</span></p>
+                <div class="absolute top-4 right-4 font-mono text-[10px] text-gray-600">ID: SEC-01</div>
                 
-                <ul class="space-y-3 text-sm text-gray-300">
-                    <li class="flex items-start"><span class="text-primary mr-2">></span> Monitored network and system activities to identify suspicious events and security anomalies.</li>
-                    <li class="flex items-start"><span class="text-primary mr-2">></span> Performed vulnerability assessments using Nmap and Nessus and documented remediation recommendations.</li>
-                    <li class="flex items-start"><span class="text-primary mr-2">></span> Analyzed network traffic using Wireshark and assisted in IDS monitoring using Snort.</li>
-                    <li class="flex items-start"><span class="text-primary mr-2">></span> Assisted in log analysis, incident investigation, and implementation of security hardening best practices.</li>
+                <div class="w-[85%] aspect-square rounded-2xl overflow-hidden relative z-10 border border-white/10 shadow-[0_0_30px_rgba(0,240,255,0.1)] group-hover:shadow-[0_0_40px_rgba(0,240,255,0.3)] transition-all duration-500 mt-4">
+                    <img src="assets/images/profile.jpg" alt="Rushikesh Dange" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                
+                <div class="mt-6 text-center z-10 w-full">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neonAlt/10 border border-neonAlt/30 mb-2">
+                        <div class="w-2 h-2 rounded-full bg-neonAlt animate-pulse"></div>
+                        <span class="font-mono text-[10px] text-neonAlt tracking-widest uppercase">System Online</span>
+                    </div>
+                </div>
+                <div class="laser-border"></div>
+            </div>
+
+            <!-- Intro Panel (Advanced Typography) -->
+            <div class="bento-panel p-10 lg:p-14 flex flex-col justify-center relative overflow-hidden md:col-span-8 min-h-[450px]">
+                <!-- Background decorative elements -->
+                <div class="absolute -right-20 -top-20 text-[200px] text-white/[0.02] font-black pointer-events-none select-none">RD</div>
+                <div class="absolute bottom-10 right-10 font-mono text-xs text-gray-700 text-right pointer-events-none">
+                    v2.0.4<br>
+                    <span class="text-neon/50">auth_bypass = true</span>
+                </div>
+
+                <div class="relative z-10">
+                    <span class="font-mono text-neon text-sm tracking-[0.2em] uppercase mb-4 block decrypt-text">// Root Access Granted</span>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-4 font-sans group cursor-default">
+                        <span class="block transition-transform duration-300 group-hover:-translate-y-1">RUSHIKESH</span>
+                        <span class="block transition-transform duration-300 group-hover:translate-x-2">DANGE.</span>
+                    </h1>
+                    
+                    <h2 class="font-mono text-gray-400 text-lg lg:text-xl mt-6 mb-8 border-l-2 border-neonAlt pl-4">
+                        Cyber Security <span class="text-white">&</span> DevSecOps Engineer
+                    </h2>
+                    
+                    <p class="text-lg font-light text-gray-300 leading-relaxed max-w-2xl mb-10">
+                        Securing the <strong class="text-white font-medium">Enterprise</strong>. 
+                        Automating <strong class="text-white font-medium">Compliance</strong>. 
+                        Scaling <strong class="text-white font-medium">Cloud</strong>.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-6 mt-auto">
+                        <a href="#projects" class="group relative inline-flex items-center justify-center px-8 py-3 font-mono text-sm font-bold text-white transition-all duration-200 bg-neonAlt/10 border border-neonAlt rounded hover:bg-neonAlt hover:text-base hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] overflow-hidden">
+                            <span class="relative z-10 flex items-center gap-2">Execute Ops <i class="fas fa-terminal"></i></span>
+                        </a>
+                        
+                        <div class="flex gap-4">
+                            <a href="https://github.com/Rushikesh-dange/" class="social-btn"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/rushikesh-dange/" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="http://instagram.com/rushikesh_dange_" class="social-btn"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=100009689072863" class="social-btn"><i class="fab fa-facebook"></i></a>
+                            <a href="https://tryhackme.com/p/Rushikesh.Dange" class="social-btn"><i class="fas fa-shield-halved"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ABOUT BENTO ================= -->
+        <div class="bento-panel p-10 mb-6 group">
+            <h2 class="text-xs font-mono text-gray-500 tracking-widest uppercase mb-6 flex justify-between">
+                <span>/01 Core Directives (About)</span>
+                <i class="fas fa-fingerprint text-neonAlt/50 text-xl group-hover:text-neonAlt transition-colors"></i>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    My core focus is on <span class="text-white font-bold">Cyber Security</span>. I specialize in protecting enterprise infrastructures through rigorous Vulnerability Assessments (VAPT), SOC Operations, Cyber Forensics, and ensuring strict PKI Compliance Audits. I am trained to identify threats from an attacker's perspective and neutralize them from a defender's standpoint.
+                </p>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    To proactively secure software supply chains, my secondary focus is <span class="text-white font-bold">DevSecOps</span>. I bridge the gap between development and security by building automated compliance pipelines, integrating critical security gates (SAST/DAST), and performing continuous container vulnerability scans.
+                </p>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Finally, I leverage modern <span class="text-white font-bold">DevOps & Cloud</span> practices. By deploying scalable Infrastructure as Code (IaC) on AWS via Terraform and managing orchestrations with Kubernetes, I ensure that security architectures are highly scalable and automated.
+                </p>
+            </div>
+        </div>
+
+        <!-- ================= SKILLS BENTO (Priority Layout) ================= -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <!-- Priority 1 -->
+            <div class="bento-panel p-8">
+                <h3 class="font-mono text-neon text-sm tracking-widest mb-4">PRIORITY: 01</h3>
+                <h4 class="text-2xl font-bold text-white mb-6">Cyber Security</h4>
+                <ul class="space-y-3 font-mono text-sm text-gray-400">
+                    <li class="flex gap-2"><span class="text-neon">></span> VAPT & OWASP Top 10</li>
+                    <li class="flex gap-2"><span class="text-neon">></span> SOC Ops & Incident Response</li>
+                    <li class="flex gap-2"><span class="text-neon">></span> Cyber Forensics</li>
+                    <li class="flex gap-2"><span class="text-neon">></span> PKI & Compliance Audit</li>
+                    <li class="flex gap-2"><span class="text-neon">></span> Threat Hunting</li>
+                    <li class="flex gap-2"><span class="text-neon">></span> Snort, Wireshark, Nessus</li>
+                </ul>
+            </div>
+            <!-- Priority 2 -->
+            <div class="bento-panel p-8">
+                <h3 class="font-mono text-neonAlt text-sm tracking-widest mb-4">PRIORITY: 02</h3>
+                <h4 class="text-2xl font-bold text-white mb-6">DevSecOps</h4>
+                <ul class="space-y-3 font-mono text-sm text-gray-400">
+                    <li class="flex gap-2"><span class="text-neonAlt">></span> Compliance Pipelines</li>
+                    <li class="flex gap-2"><span class="text-neonAlt">></span> SAST / DAST Integration</li>
+                    <li class="flex gap-2"><span class="text-neonAlt">></span> Container Security (Trivy)</li>
+                    <li class="flex gap-2"><span class="text-neonAlt">></span> Security Gates (SonarQube)</li>
+                    <li class="flex gap-2"><span class="text-neonAlt">></span> IaC Scanning (Checkov)</li>
+                    <li class="flex gap-2"><span class="text-neonAlt">></span> Runtime Defense (Falco)</li>
+                </ul>
+            </div>
+            <!-- Priority 3 -->
+            <div class="bento-panel p-8">
+                <h3 class="font-mono text-white text-sm tracking-widest mb-4">PRIORITY: 03</h3>
+                <h4 class="text-2xl font-bold text-white mb-6">DevOps & Cloud</h4>
+                <ul class="space-y-3 font-mono text-sm text-gray-400">
+                    <li class="flex gap-2"><span class="text-white">></span> AWS (EC2, VPC, EKS)</li>
+                    <li class="flex gap-2"><span class="text-white">></span> Terraform (IaC)</li>
+                    <li class="flex gap-2"><span class="text-white">></span> Docker & Kubernetes</li>
+                    <li class="flex gap-2"><span class="text-white">></span> Jenkins CI/CD</li>
+                    <li class="flex gap-2"><span class="text-white">></span> Prometheus & Grafana</li>
+                    <li class="flex gap-2"><span class="text-white">></span> Git & Version Control</li>
+                </ul>
+            </div>
+            <!-- Foundations -->
+            <div class="bento-panel p-8">
+                <h3 class="font-mono text-gray-500 text-sm tracking-widest mb-4">FOUNDATIONS</h3>
+                <h4 class="text-2xl font-bold text-white mb-6">Network & OS</h4>
+                <ul class="space-y-3 font-mono text-sm text-gray-400">
+                    <li class="flex gap-2"><span class="text-gray-500">></span> Linux Admin (Kali, Ubuntu)</li>
+                    <li class="flex gap-2"><span class="text-gray-500">></span> Windows Server Admin</li>
+                    <li class="flex gap-2"><span class="text-gray-500">></span> TCP/IP, DNS, DHCP</li>
+                    <li class="flex gap-2"><span class="text-gray-500">></span> Python & SQL</li>
+                    <li class="flex gap-2"><span class="text-gray-500">></span> Bash Shell Scripting</li>
                 </ul>
             </div>
         </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 relative border-t border-primary/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center mb-12">
-                <span class="text-white text-2xl font-tech mr-4">[04]</span>
-                <h2 class="text-3xl font-bold text-primary font-tech uppercase tracking-widest">EXECUTABLES</h2>
-                <div class="h-px bg-primary/30 flex-grow ml-6"></div>
+        <!-- ================= PROJECTS BENTO ================= -->
+        <h2 class="text-xs font-mono text-gray-500 tracking-widest uppercase mb-4 mt-12">/02 Active Operations (Projects)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            
+            <!-- Proj 1 -->
+            <div class="bento-panel p-8 group hover:-translate-y-1 transition-transform">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="skill-node border-neon text-neon">Priority: Cyber Security</span>
+                </div>
+                <h3 class="text-3xl font-bold text-white mb-4">Network Intrusion Detection</h3>
+                <p class="text-gray-400 mb-6">Configured Snort on a Kali Linux environment to actively monitor and detect suspicious network traffic, identifying potential zero-day patterns and known CVE exploits.</p>
+                <div class="bg-black/40 p-4 rounded-lg font-mono text-xs text-gray-300 border border-white/5 mb-6">
+                    <strong class="text-neon">Workflow:</strong> Traffic Mirroring ➜ Snort Rules Engine ➜ Alert Generation ➜ Wireshark Packet Inspection ➜ Threat Neutralization.
+                </div>
+                <div class="flex flex-wrap gap-2 font-mono text-xs text-gray-500">
+                    <span>#Snort</span> <span>#Kali</span> <span>#Wireshark</span> <span>#PCAP</span>
+                </div>
             </div>
 
-            <div class="space-y-12">
-                <!-- Project 1 -->
-                <div class="relative bg-black border border-primary/30 p-8 hover:border-primary transition-all duration-300 group">
-                    <!-- Tech decoration -->
-                    <div class="absolute top-0 right-0 p-2 text-xs text-primary/50 font-tech">ID: 0x01</div>
-                    <div class="absolute bottom-0 left-0 w-8 h-1 bg-primary"></div>
-                    
-                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
-                        <div>
-                            <p class="text-primary font-tech text-sm mb-2">// Network Security</p>
-                            <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">Network Intrusion Detection System (NIDS)</h3>
-                        </div>
-                        <div class="text-3xl text-gray-700 group-hover:text-primary/50 transition-colors hidden md:block">
-                            <i class="fas fa-radar"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-900/80 p-4 rounded-sm border-l-2 border-primary mb-6 text-sm text-gray-300 leading-relaxed">
-                        <p class="mb-2">Configured Snort on Kali Linux to monitor and detect suspicious network traffic.</p>
-                        <p>Captured and analyzed alerts for possible threats, helping to understand intrusion detection in real networks.</p>
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-3 font-tech text-xs">
-                        <span class="bg-primary/10 text-primary px-2 py-1">Snort</span>
-                        <span class="bg-primary/10 text-primary px-2 py-1">Kali Linux</span>
-                        <span class="bg-primary/10 text-primary px-2 py-1">Network Traffic Analysis</span>
-                    </div>
+            <!-- Proj 2 -->
+            <div class="bento-panel p-8 group hover:-translate-y-1 transition-transform">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="skill-node border-neonAlt text-neonAlt">Priority: DevSecOps</span>
+                    <a href="https://github.com/Sec-DO/Automated-CI-CD-and-Security-Compliance-Pipeline-for-Cloud-Applications" class="text-gray-500 hover:text-neonAlt"><i class="fab fa-github text-2xl"></i></a>
                 </div>
-
-                <!-- Project 2 -->
-                <div class="relative bg-black border border-primary/30 p-8 hover:border-primary transition-all duration-300 group">
-                    <div class="absolute top-0 right-0 p-2 text-xs text-primary/50 font-tech">ID: 0x02</div>
-                    <div class="absolute bottom-0 left-0 w-8 h-1 bg-primary"></div>
-                    
-                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
-                        <div>
-                            <p class="text-primary font-tech text-sm mb-2">// Cloud Architecture</p>
-                            <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">Automated AWS 3-Tier Web Application</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-900/80 p-4 rounded-sm border-l-2 border-primary mb-6 text-sm text-gray-300 leading-relaxed space-y-2">
-                        <p>Designed and deployed a secure AWS 3-Tier Architecture using VPC, including public/private subnets, route tables, NAT Gateway, and EC2 instances.</p>
-                        <p>Automated cloud infrastructure provisioning using Terraform, enabling scalable and repeatable deployment with IaC.</p>
-                        <p>Configured load balancing, security groups, and networking components to improve application availability.</p>
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-3 font-tech text-xs">
-                        <span class="bg-primary/10 text-primary px-2 py-1">AWS VPC</span>
-                        <span class="bg-primary/10 text-primary px-2 py-1">Terraform</span>
-                        <span class="bg-primary/10 text-primary px-2 py-1">EC2/ALB</span>
-                    </div>
+                <h3 class="text-3xl font-bold text-white mb-4">SecureDevOps Pipeline</h3>
+                <p class="text-gray-400 mb-6">An end-to-end DevSecOps platform automating AWS infrastructure provisioning and secure software delivery. Integrated comprehensive automated security scanning and runtime threat detection.</p>
+                <div class="bg-black/40 p-4 rounded-lg font-mono text-xs text-gray-300 border border-white/5 mb-6">
+                    <strong class="text-neonAlt">Workflow:</strong> Code Commit ➜ Jenkins ➜ SonarQube(SAST) ➜ Trivy ➜ Terraform ➜ AWS EKS ➜ Prometheus.
                 </div>
-
-                <!-- Project 3 -->
-                <div class="relative bg-black border border-primary/30 p-8 hover:border-primary transition-all duration-300 group">
-                    <div class="absolute top-0 right-0 p-2 text-xs text-primary/50 font-tech">ID: 0x03</div>
-                    <div class="absolute bottom-0 left-0 w-8 h-1 bg-primary"></div>
-                    
-                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
-                        <div>
-                            <p class="text-primary font-tech text-sm mb-2">// DevSecOps</p>
-                            <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">SecureDevOps Compliance Pipeline</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-900/80 p-4 rounded-sm border-l-2 border-primary mb-6 text-sm text-gray-300 leading-relaxed space-y-2">
-                        <p>Built a secure DevSecOps pipeline using Jenkins, GitHub, Docker, Kubernetes (AWS EKS), and Terraform.</p>
-                        <p>Integrated SonarQube, Semgrep, Trivy, Checkov, and tfsec for automated security scanning. Implemented security gates.</p>
-                        <p>Configured Prometheus, Grafana, Falco, and ELK Stack for monitoring, log analysis, and runtime threat detection.</p>
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-3 font-tech text-xs">
-                        <span class="bg-primary/10 text-primary px-2 py-1">Jenkins/Docker/K8s</span>
-                        <span class="bg-primary/10 text-primary px-2 py-1">Trivy/SonarQube</span>
-                        <span class="bg-primary/10 text-primary px-2 py-1">ELK/Prometheus</span>
-                    </div>
+                <div class="flex flex-wrap gap-2 font-mono text-xs text-gray-500">
+                    <span>#Terraform</span> <span>#Jenkins</span> <span>#SonarQube</span> <span>#Trivy</span>
                 </div>
+            </div>
 
+            <!-- Proj 3 -->
+            <div class="bento-panel p-8 group hover:-translate-y-1 transition-transform">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="skill-node border-white text-white">Priority: DevOps</span>
+                </div>
+                <h3 class="text-3xl font-bold text-white mb-4">AWS 3-Tier Architecture</h3>
+                <p class="text-gray-400 mb-6">Designed and deployed a highly available, secure AWS 3-Tier Architecture using VPCs, public/private subnets, route tables, and NAT Gateways. Implemented strict Security Groups.</p>
+                <div class="bg-black/40 p-4 rounded-lg font-mono text-xs text-gray-300 border border-white/5 mb-6">
+                    <strong class="text-white">Workflow:</strong> User ➜ ALB (Public) ➜ Web EC2 (Private) ➜ DB Instance (Isolated).
+                </div>
+                <div class="flex flex-wrap gap-2 font-mono text-xs text-gray-500">
+                    <span>#AWS_VPC</span> <span>#EC2</span> <span>#Terraform</span> <span>#LoadBalancing</span>
+                </div>
+            </div>
+
+            <!-- Proj 4 -->
+            <div class="bento-panel p-8 group hover:-translate-y-1 transition-transform">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="skill-node border-gray-500 text-gray-400">Full Stack</span>
+                    <a href="https://github.com/Rushikesh-dange/Foody-The-Restaurant-Management-System" class="text-gray-500 hover:text-white"><i class="fab fa-github text-2xl"></i></a>
+                </div>
+                <h3 class="text-3xl font-bold text-white mb-4">Foody - Management System</h3>
+                <p class="text-gray-400 mb-6">A mobile application built with React Native and Firebase allowing customers to browse menus, place orders, and make secure payments. Implemented database rules for secure backend access.</p>
+                <div class="bg-black/40 p-4 rounded-lg font-mono text-xs text-gray-300 border border-white/5 mb-6">
+                    <strong class="text-gray-400">Stack:</strong> React Native ➜ Firebase Auth ➜ Secure Payment Gateway.
+                </div>
+                <div class="flex flex-wrap gap-2 font-mono text-xs text-gray-500">
+                    <span>#ReactNative</span> <span>#Firebase</span> <span>#Payments</span>
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-32 relative border-t border-primary/20 bg-gray-900/50 text-center">
-        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-bold text-white mb-6 font-tech glitched-text" data-text="ESTABLISH_CONNECTION">ESTABLISH_CONNECTION</h2>
-            <p class="text-gray-400 mb-10 text-sm">
-                I am actively seeking opportunities as a Cyber Security Engineer. My communication ports are open. Whether you have an inquiry, an opportunity, or just want to ping, I'll ACK back.
-            </p>
-            <a href="mailto:dangerushi19@gmail.com" class="cyber-button inline-block text-black bg-primary px-8 py-4 font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">
-                SEND_PACKET()
-            </a>
+        <!-- ================= EXPERIENCE & ED BENTO ================= -->
+        <h2 class="text-xs font-mono text-gray-500 tracking-widest uppercase mb-4 mt-12">/03 Experience & Validation Logs</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            
+            <div class="bento-panel p-10">
+                <h3 class="text-2xl font-bold text-white mb-8">Professional Experience</h3>
+                
+                <div class="border-l border-white/10 pl-6 space-y-10">
+                    <div class="relative">
+                        <div class="absolute w-3 h-3 bg-neon rounded-full -left-[1.65rem] top-1 shadow-[0_0_10px_#ff2a2a]"></div>
+                        <h4 class="text-xl font-bold text-white">SOC Intern <span class="text-gray-500">@ Shree Saibaba Sansthan</span></h4>
+                        <p class="font-mono text-xs text-neon mb-4 mt-1">Jan 2025 – Apr 2025 | Shirdi</p>
+                        <ul class="space-y-2 text-gray-400 text-sm list-disc pl-4">
+                            <li>Monitored enterprise network and system activities to identify suspicious events, anomalies, and potential breaches.</li>
+                            <li>Performed rigorous vulnerability assessments using Nmap and Nessus, documenting critical remediation recommendations.</li>
+                            <li>Analyzed deep packet network traffic utilizing Wireshark and supported IDS continuous monitoring with Snort.</li>
+                            <li>Assisted in extensive log analysis, incident investigation workflows, and enforcing security hardening best practices.</li>
+                        </ul>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute w-3 h-3 bg-neonAlt rounded-full -left-[1.65rem] top-1"></div>
+                        <h4 class="text-xl font-bold text-white">Vice President, ECESA</h4>
+                        <p class="font-mono text-xs text-neonAlt mb-4 mt-1">Leadership Role</p>
+                        <p class="text-gray-400 text-sm">Acted as a bridge between the committee and students; organized technical workshops and seminars that boosted overall participation by 30%.</p>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute w-3 h-3 bg-gray-500 rounded-full -left-[1.65rem] top-1"></div>
+                        <h4 class="text-xl font-bold text-white">GDSC Core Team</h4>
+                        <p class="font-mono text-xs text-gray-500 mb-4 mt-1">Google Developer Student Club</p>
+                        <p class="text-gray-400 text-sm">Helped organize coding workshops and mentored peers in modern development workflows and fundamental security concepts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-panel p-10 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-8">Education & Certifications</h3>
+                    <div class="border-l border-white/10 pl-6 space-y-8 mb-12">
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-white rounded-full -left-[1.65rem] top-1"></div>
+                            <h4 class="text-lg font-bold text-white">PGCP-ITISS</h4>
+                            <p class="font-mono text-xs text-gray-400 mb-1">C-DAC's Advanced Computing Training School</p>
+                            <p class="text-gray-500 text-sm">Network Defense, Compliance Audit, Cyber Forensics & PKI.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-gray-700 rounded-full -left-[1.65rem] top-1"></div>
+                            <h4 class="text-lg font-bold text-white">B.Tech – ECE</h4>
+                            <p class="font-mono text-xs text-gray-400 mb-1">Sanjivani College of Engineering</p>
+                            <p class="text-gray-500 text-sm">2021 – 2025 | Pune University (63.3%)</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-gray-800 rounded-full -left-[1.65rem] top-1"></div>
+                            <h4 class="text-lg font-bold text-white">HSC (Science)</h4>
+                            <p class="font-mono text-xs text-gray-400 mb-1">Shree Ganesh Junior College</p>
+                            <p class="text-gray-500 text-sm">2021 | Maharashtra State Board (78.17%)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-black/30 p-6 rounded-xl border border-white/5">
+                    <h4 class="font-mono text-sm text-gray-400 tracking-widest mb-4">VERIFIED CERTIFICATIONS</h4>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-3"><i class="fab fa-google text-gray-500 w-5"></i><span class="text-sm text-gray-300">Google Cloud Computing Foundations</span></div>
+                        <div class="flex items-center gap-3"><i class="fas fa-shield-alt text-gray-500 w-5"></i><span class="text-sm text-gray-300">EC-Council Ethical Hacking Essentials</span></div>
+                        <div class="flex items-center gap-3"><i class="fas fa-network-wired text-gray-500 w-5"></i><span class="text-sm text-gray-300">Fortinet Tech Intro to Cybersecurity</span></div>
+                        <div class="flex items-center gap-3"><i class="fas fa-building text-gray-500 w-5"></i><span class="text-sm text-gray-300">Deloitte Cyber Job Simulation</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="py-6 text-center text-xs font-tech text-gray-500 border-t border-primary/30 bg-black">
-        <p>SYSTEM TERMINATED. BUILT BY RUSHIKESH DANGE.</p>
-    </footer>
+        <!-- ================= FOOTER ================= -->
+        <div class="bento-panel p-8 flex justify-between items-center">
+            <a href="mailto:dangerushi19@gmail.com" class="font-mono text-neon border-b border-neon pb-1 hover:tracking-widest transition-all">dangerushi19@gmail.com</a>
+            
+            <div class="flex items-center gap-6">
+                <span class="font-mono text-xs text-gray-600 hidden md:block">SYS.STATUS: SECURE</span>
+                <img src="https://api.visitorbadge.io/api/visitors?path=rushikeshdange.online&label=PINGS&countColor=%23ffffff&labelStyle=upper" alt="Visitor Count" class="h-6 opacity-80 hover:opacity-100 transition-opacity">
+            </div>
+        </div>
 
-    <!-- Custom JS -->
+    </main>
+
     <script src="assets/js/main.js"></script>
 </body>
 </html>

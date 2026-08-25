@@ -1,121 +1,95 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Mobile menu toggle ---
-    const btn = document.getElementById('mobile-menu-button');
-    const menu = document.getElementById('mobile-menu');
-
-    btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
+    
+    // --- Interactive Spotlight ---
+    const spotlight = document.getElementById('spotlight');
+    
+    document.addEventListener('mousemove', (e) => {
+        if(spotlight) {
+            spotlight.style.left = e.clientX + 'px';
+            spotlight.style.top = e.clientY + 'px';
+        }
     });
 
-    // Close mobile menu when a link is clicked
-    const links = menu.querySelectorAll('a');
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            menu.classList.add('hidden');
+    // Make spotlight larger when hovering over interactive elements
+    const interactiveElements = document.querySelectorAll('a, .project-row, .bento-panel');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            spotlight.style.width = '800px';
+            spotlight.style.height = '800px';
+        });
+        el.addEventListener('mouseleave', () => {
+            spotlight.style.width = '600px';
+            spotlight.style.height = '600px';
         });
     });
 
-    // --- Typewriter Effect ---
-    const typeWriterElement = document.getElementById('typewriter-command');
-    if (typeWriterElement) {
-        const commands = [
-            "./init_portfolio.sh",
-            "whoami",
-            "nmap -sV target.local",
-            "cat credentials.txt",
-            "sudo -l",
-            "connecting to secure server..."
-        ];
-        
-        let commandIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        
-        function typeWriter() {
-            const currentCommand = commands[commandIndex];
+    // --- Text Decryption Animation ---
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+    
+    function decryptElement(element, originalText, speed = 30) {
+        let iteration = 0;
+        let interval = setInterval(() => {
+            element.innerText = originalText
+                .split("")
+                .map((letter, index) => {
+                    if(index < iteration) {
+                        return originalText[index];
+                    }
+                    return letters[Math.floor(Math.random() * letters.length)];
+                })
+                .join("");
             
-            if (isDeleting) {
-                typeWriterElement.innerHTML = currentCommand.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typeWriterElement.innerHTML = currentCommand.substring(0, charIndex + 1);
-                charIndex++;
+            if(iteration >= originalText.length){ 
+                clearInterval(interval);
             }
-            
-            let typingSpeed = 100;
-            if (isDeleting) typingSpeed = 50;
-            
-            if (!isDeleting && charIndex === currentCommand.length) {
-                typingSpeed = 2000; // Pause at end
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                commandIndex = (commandIndex + 1) % commands.length;
-                typingSpeed = 500; // Pause before new word
-            }
-            
-            setTimeout(typeWriter, typingSpeed);
-        }
-        
-        // Start typewriter
-        setTimeout(typeWriter, 1000);
+            iteration += 1 / 3;
+        }, speed);
     }
 
-    // --- Matrix Rain Background ---
-    const canvas = document.getElementById('matrix-bg');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
+    // Apply to elements with .decrypt-text
+    const decryptElements = document.querySelectorAll('.decrypt-text');
+    decryptElements.forEach(el => {
+        const originalText = el.innerText;
+        // Store original text
+        el.dataset.original = originalText;
         
-        // Set canvas size
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Initial animation
+        setTimeout(() => decryptElement(el, originalText), 500);
         
-        // Characters for matrix (Katakana + Latin + Numerals)
-        const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ";
-        const charsArray = matrixChars.split('');
-        
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        
-        // Array for drops - one per column
-        const drops = [];
-        for (let x = 0; x < columns; x++) {
-            drops[x] = 1;
+        // Animate on hover of parent panel
+        const parentPanel = el.closest('.bento-panel');
+        if(parentPanel) {
+            parentPanel.addEventListener('mouseenter', () => {
+                decryptElement(el, originalText, 15);
+            });
         }
+    });
+
+    // Apply to slower elements
+    const slowDecryptElements = document.querySelectorAll('.decrypt-text-slow');
+    slowDecryptElements.forEach(el => {
+        const originalHTML = el.innerHTML;
+        const originalText = el.innerText;
         
-        // Draw the matrix rain
-        function drawMatrix() {
-            // Translucent black background to create trail effect
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // For complex HTML (like the paragraph with strong tags), 
+        // we'll just animate the innerText once, then restore HTML
+        let iteration = 0;
+        let interval = setInterval(() => {
+            el.innerText = originalText
+                .split("")
+                .map((letter, index) => {
+                    if(index < iteration) {
+                        return originalText[index];
+                    }
+                    return letters[Math.floor(Math.random() * letters.length)];
+                })
+                .join("");
             
-            ctx.fillStyle = '#0F0'; // Green text
-            ctx.font = fontSize + 'px monospace';
-            
-            for (let i = 0; i < drops.length; i++) {
-                // Random character
-                const text = charsArray[Math.floor(Math.random() * charsArray.length)];
-                
-                // Draw character
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                
-                // Reset drop to top randomly
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                
-                // Move drop down
-                drops[i]++;
+            if(iteration >= originalText.length){ 
+                clearInterval(interval);
+                el.innerHTML = originalHTML; // Restore original HTML formatting
             }
-        }
-        
-        // Loop the animation
-        setInterval(drawMatrix, 33);
-        
-        // Handle resize
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    }
+            iteration += 1 / 2;
+        }, 15);
+    });
 });
